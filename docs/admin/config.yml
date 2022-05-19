@@ -1,0 +1,59 @@
+backend:
+  name: github
+  repo: scutum-life/scutum.life
+  branch: main
+publish_mode: editorial_workflow
+media_folder: static/images
+public_folder: /images
+
+i18n:
+  # Required and can be one of multiple_folders, multiple_files or single_file
+  # multiple_folders - persists files in `<folder>/<locale>/<slug>.<extension>`
+  # multiple_files - persists files in `<folder>/<slug>.<locale>.<extension>`
+  # single_file - persists a single file in `<folder>/<slug>.<extension>`
+  structure: multiple_files
+  locales: [en, ru, ua, pl]
+  default_locale: en
+
+collections:
+  - name: "trainings" # Used in routes, e.g., /admin/collections/blog
+    label: "Trainings" # Used in the UI
+    folder: "content/trainings" # The path to the folder where the documents are stored
+    create: true # Allow users to create new documents in this collection
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}" # Filename template, e.g., YYYY-MM-DD-title.md
+    i18n: true
+    fields: # The fields for each document, usually in front matter
+      - {label: "Layout", name: "layout", widget: "hidden", default: "trainings"}
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "Publish Date", name: "date", widget: "datetime"}
+      - {label: "Featured Image", name: "thumbnail", widget: "image"}
+      # - {label: "Rating (scale of 1-5)", name: "rating", widget: "number"}
+      - {label: "Author", name: "author", widget: "string"}
+      - {label: "Price", name: "price", widget: "string"}
+      - {label: "Unit", name: "unit", widget: "string"}
+      - {label: "Services", name: "services", widget: "list"}
+      - {label: "Body", name: "body", widget: "markdown"}
+  - name: pages
+    label: Pages
+    # Configure i18n for this collection.
+    i18n:
+      structure: single_file
+      locales: [en, ru, ua, pl]
+      default_locale: en
+    files:
+      - name: contacts
+        label: Contacts
+        file: "content/contacts.md" # The path to the folder where the documents are stored
+        # Enable i18n for this file.
+        # i18n: true
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
+      - name: payments
+        label: Payments Details
+        file: "content/payments.md"
+        # Enable i18n for this file.
+        # i18n: true
+        fields:
+          - {label: "Title", name: "title", widget: "string"}
+          - {label: "Body", name: "body", widget: "markdown"}
